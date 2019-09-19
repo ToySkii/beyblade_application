@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import yaml
 import csv
+from tqdm import tqdm
 
 # コンフィグファイル読み込み
 with open('config.yml', 'r', encoding="utf-8") as yml:
@@ -21,7 +22,15 @@ retention_list = [] # 行保持リスト
 # 出力リスト
 output_list = ["区分\tタイプ\t名称\t攻撃力\t防御力\t持久力\t重量\t機動力\tバースト力"]
 
-for line in text:
+tmp_list = []
+# 進捗バーを出すための一時リストを作成
+for value in text:
+    tmp_list.append(value)
+
+# データ取得処理開始
+for idx in tqdm(range(len(tmp_list))):
+    line = tmp_list[idx]
+
     # 改行削除
     line = line.replace("\n", "")
 
